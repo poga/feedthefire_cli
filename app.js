@@ -175,7 +175,7 @@ function parseFeed(feed) {
 function getAndSet(url, hash, statusURL, fbURL, secret) {
   request(url, function(err, resp, body) {
     if (!err && resp.statusCode == 200) {
-      feedContent[hash] = {time: new Date().getTime(), content: body};
+      feedContent[hash] = {lastSync: new Date().getTime(), content: body};
       setFeed(body, statusURL, fbURL, secret);
     } else {
       if (err) {
