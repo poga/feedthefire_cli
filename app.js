@@ -214,7 +214,8 @@ function setArticles(articles, done, total, statusURL, fbURL, secret) {
   }
 
   var article = articles[done];
-  var id = getHash(article.guid || article.link || article.title);
+  var id = getHash(article.guid || article.link ||
+    article.title || article.summary);
   var date = article.pubDate || article.pubdate || article.date ||
     article["rss:pubdate"] || new Date().toString();
   var timestamp = Date.parse(date);
