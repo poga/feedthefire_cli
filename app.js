@@ -138,6 +138,7 @@ function parseFeeds() {
       parseFeed(user[index]);
     }
   }
+  console.log("Parsed feeds at: " + new Date());
 }
 
 function parseFeed(feed) {
