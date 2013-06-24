@@ -230,7 +230,7 @@ function setArticles(articles, done, total, statusURL, fbURL, secret) {
       writeStatus(statusURL, err);
     } else {
       done++;
-      if (done == total - 1) {
+      if (done == total) {
         writeStatus(statusURL, "Last Sync: " + new Date().toString());
       } else {
         setArticles(articles, done, total, statusURL, fbURL, secret);
