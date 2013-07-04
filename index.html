@@ -16,7 +16,7 @@
   <link href="static/solarized_light.css" rel="stylesheet">
 
   <script src="https://cdn.firebase.com/v0/firebase.js"></script>
-  <script src="https://cdn.firebase.com/v0/firebase-auth-client.js"></script>
+  <script src="https://cdn.firebase.com/v0/firebase-simple-login.js"></script>
 
   <style>
     .container {
@@ -471,7 +471,7 @@ ref.child("articles").limit(3).on("child_added", function(snapshot) {
 
   var ref = new Firebase(__URL);
   var userRef = null;
-  var authClient = new FirebaseAuthClient(ref, function(err, user) {
+  var auth = new FirebaseSimpleLogin(ref, function(err, user) {
     if (err) {
       humane.error(err.message);
     } else if (user) {
@@ -513,7 +513,7 @@ ref.child("articles").limit(3).on("child_added", function(snapshot) {
       $("pre code").each(function(i, e) { hljs.highlightBlock(e); });
       eval(code);
       $("#login").click(function() {
-        authClient.login("persona");
+        auth.login("persona");
       });
     });
   }
@@ -534,7 +534,7 @@ ref.child("articles").limit(3).on("child_added", function(snapshot) {
       });
       $("#logout").click(function() {
         cleanupHandlers();
-        authClient.logout();
+        auth.logout();
       });
     });
   }
