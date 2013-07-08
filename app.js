@@ -9,7 +9,8 @@ var feedContent = {};
 
 var REFRESH_INTERVAL = 600000;
 
-var ref = new Firebase("https://feedthefire.firebaseio.com/persona");
+var url = process.env.FBURL || "https://feedthefire.firebaseio.com/persona";
+var ref = new Firebase(url);
 ref.auth(process.env.SECRET, function(err) {
   if (err) {
     console.error("Firebase authentication failed!", err);
