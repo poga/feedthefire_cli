@@ -156,7 +156,7 @@ function parseFeed(feed) {
       return;
     }
 
-    var fbURL = new Firebase(feed.value.firebase).toString();
+    var fbURL = feed.value.firebase;
     var secret = feed.value.secret;
     var urlHash = getHash(url);
 
