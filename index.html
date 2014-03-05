@@ -467,7 +467,7 @@ ref.child("articles").limit(3).on("child_added", function(snapshot) {
 <script type="text/javascript">
   var __num = 0;
   var __URL = "https://feedthefire.firebaseio.com";
-  humane.error = humane.spawn({addnCls: "humane-jackedup-error"});
+  humane.error = humane.spawn({addnCls: "humane-jackedup-error", timeout: 25000});
 
   var ref = new Firebase(__URL);
   var userRef = null;
@@ -476,7 +476,13 @@ ref.child("articles").limit(3).on("child_added", function(snapshot) {
       humane.error(err.message);
     } else if (user) {
       userRef = new Firebase(__URL).child(user.provider).child(user.id);
-      loadUserPage(user);
+      userRef.once("value", function(snapshot) {
+        if (snapshot.val() == null) {
+          humane.error("Sorry, but this service is no longer accepting new users.<br/>Please clone the <a href='http://github.com/firebase/feedthefire'>code from Github</a> to setup your own instance!");
+        } else {
+          loadUserPage(user);
+        }
+      });
     } else {
       loadFrontPage();
     }
