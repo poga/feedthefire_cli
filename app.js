@@ -1,16 +1,35 @@
 
-var crypto = require("crypto")
+var fs = require("fs")
+  , crypto = require("crypto")
   , request = require("request")
   , Parser = require("feedparser")
-  , Firebase = require("firebase");
+  , Firebase = require("firebase")
+  , express = require("express");
 
+var app = express();
 var feeds = {};
 var feedContent = {};
 
 var REFRESH_INTERVAL = 600000;
+var url = process.env.FBURL;
+var ref = new Firebase(url).child('persona');
 
-var url = process.env.FBURL || "https://feedthefire.firebaseio.com/persona";
-var ref = new Firebase(url);
+app.get("/", function(req, res) {
+  fs.readFile("index.html", {encoding: 'utf8'}, function(err, data) {
+    if (err != null) {
+      res.send(500, {error: err});
+    } else {
+      res.send(data.replace("{{ FBURL }}", url));
+    }
+  });
+});
+app.use("/static", express.static(__dirname + "/static"));
+
+var port = process.env.PORT || 5000;
+app.listen(port, function() {
+  console.log("Serving on port " + port);
+});
+
 ref.auth(process.env.SECRET, function(err) {
   if (err) {
     console.error("Firebase authentication failed!", err);
