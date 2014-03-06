@@ -34,27 +34,31 @@ override these default security settings.
 More instructions [are available here](https://www.firebase.com/docs/security/simple-login-persona.html).
 
 2. Check out the master branch of FeedTheFire repository:
-```bash
-git clone https://github.com/firebase/feedthefire
-cd feedthefire
-git checkout master
-```
+
+  ```bash
+  git clone https://github.com/firebase/feedthefire
+  cd feedthefire
+  git checkout master
+  ```
 
 3. Create a Heroku app (you must have the toolbelt installed):
-```bash
-heroku create
-```
+
+  ```bash
+  heroku create
+  ```
 
 4. Set up the `FBURL` and `SECRET` environment variables. These should point
 to your Firebase and its secret key respectively:
-```bash
-heroku config:set FBURL='https://<my-firebase>.firebaseio.com/' SECRET='my-secret-key'
-```
+
+  ```bash
+  heroku config:set FBURL='https://<my-firebase>.firebaseio.com/' SECRET='my-secret-key'
+  ```
 
 5. Deploy the code. A `Profile` is already included for your convenience:
-```bash
-git push heroku master
-```
+
+  ```bash
+  git push heroku master
+  ```
 
 Architecture
 ------------
