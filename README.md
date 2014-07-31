@@ -1,3 +1,8 @@
+Deprecation Notice
+===========================
+Feed the Fire is deprecated and no longer maintained or supported, if you're interested in a feed reader built on Firebase, check out [Firereader](https://github.com/firebase/firereader).
+
+
 Feed the Fire
 =============
 Feed the Fire is a combination of web frontend and a backend process to
