@@ -473,11 +473,14 @@ ref.child("articles").limit(3).on("child_added", function(snapshot) {
   var userRef = null;
   var auth = new FirebaseSimpleLogin(ref, function(err, user) {
     if (err) {
+      console.log('err1',err);
       humane.error(err.message);
     } else if (user) {
+      console.log('userpage');
       userRef = new Firebase(__URL).child(user.provider).child(user.id);
       loadUserPage(user);
     } else {
+      console.log('frontpage');
       loadFrontPage();
     }
   });
@@ -513,6 +516,7 @@ ref.child("articles").limit(3).on("child_added", function(snapshot) {
       $("pre code").each(function(i, e) { hljs.highlightBlock(e); });
       eval(code);
       $("#login").click(function() {
+        console.log('click_login');
         auth.login("persona");
       });
     });
