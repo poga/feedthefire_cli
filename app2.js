@@ -2,7 +2,8 @@ var fs = require("fs"),
     crypto = require("crypto"),
     request = require("request"),
     Parser = require("feedparser"),
-    Firebase = require("firebase");
+    Firebase = require("firebase"),
+    async = require("async");
 
 var feeds = {};
 var feedContent = {};
@@ -34,9 +35,13 @@ function getFeedFromURL() {
           return;
         }
         //console.log('articles',articles);
-        for(var i=0; i<articles.length;i++){
-           saveFeedArticle(articles[i]);
-        }
+        async.each(articles, saveFeedArticle, function (err) {
+            if (err) {
+                console.log(err);
+            } else {
+                process.exit();
+            }
+        });
       });
     } else {
       if (err) {
@@ -48,9 +53,9 @@ function getFeedFromURL() {
   });
 }
 
-function saveFeedArticle(article){
+function saveFeedArticle(article, cb){
     console.log('Save feed article');
-    ref.child('articles').push(sanitizeObject(article));
+    ref.child('articles').push(sanitizeObject(article), cb);
 }
 
 function sanitizeObject(obj) {
