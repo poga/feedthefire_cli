@@ -7,11 +7,9 @@ var fs = require("fs"),
 var feeds = {};
 var feedContent = {};
 
-//var REFRESH_INTERVAL = 600000;
-var REFRESH_INTERVAL = 60000;
-var FBURL = "torid-fire-6233.firebaseio.com";
-var SECRET = "V0Fw33XLTOaFWS9OEr8tv7srY9nEU0O9ZSwxpQjT";
-var FEEDURL="http://blog.g0v.tw/posts.atom";
+var FBURL = process.argv[2];
+var SECRET = process.argv[3];
+var FEEDURL= process.argv[4];
 var ref = new Firebase(FBURL);
 
 ref.auth(SECRET, function(err) {
@@ -19,7 +17,7 @@ ref.auth(SECRET, function(err) {
     console.error("Firebase authentication failed!", err);
   } else {
     console.log('Firebase login');
-    setInterval(getFeedFromURL, REFRESH_INTERVAL);
+    getFeedFromURL();
   }
 });
 
@@ -37,6 +35,8 @@ function getFeedFromURL() {
         for(var i=0; i<articles.length;i++){
            saveFeedArticle(articles[i]);
         }
+
+        process.exit();
       });
     } else {
       if (err) {
