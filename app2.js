@@ -1,10 +1,8 @@
-
-var fs = require("fs")
-  , crypto = require("crypto")
-  , request = require("request")
-  , Parser = require("feedparser")
-  , Firebase = require("firebase")
-  , express = require("express");
+var fs = require("fs"),
+    crypto = require("crypto"),
+    request = require("request"),
+    Parser = require("feedparser"),
+    Firebase = require("firebase");
 
 var feeds = {};
 var feedContent = {};
@@ -24,7 +22,6 @@ ref.auth(SECRET, function(err) {
     setInterval(getFeedFromURL, REFRESH_INTERVAL);
   }
 });
-
 
 function getFeedFromURL() {
   console.log('Get feed from URL');
@@ -73,10 +70,10 @@ function sanitizeObject(obj) {
           newObj[key] = obj[key].toString();
         }
       } else if (key == "#") {
-        newObj["value"] = sanitizeObject(obj[key]);
+        newObj.value = sanitizeObject(obj[key]);
       } else if (key.indexOf("#") >= 0) {
         newObj["@" + key.replace("#", "")] = sanitizeObject(obj[key]);
-      } else if (sanitizeObject(obj[key]) && key != "") {
+      } else if (sanitizeObject(obj[key]) && key !== "") {
         newObj[key] = sanitizeObject(obj[key]);
       }
     }
