@@ -17,7 +17,9 @@ ref.auth(SECRET, function(err) {
     console.error("Firebase authentication failed!", err);
   } else {
     console.log('Firebase login');
-    getFeedFromURL();
+    ref.remove(function() {
+        getFeedFromURL();
+    });
   }
 });
 
@@ -35,8 +37,6 @@ function getFeedFromURL() {
         for(var i=0; i<articles.length;i++){
            saveFeedArticle(articles[i]);
         }
-
-        process.exit();
       });
     } else {
       if (err) {
