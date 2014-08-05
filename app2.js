@@ -35,7 +35,7 @@ function getFeedFromURL() {
           return;
         }
         //console.log('articles',articles);
-        async.each(articles, saveFeedArticle, function (err) {
+        async.each(articles.reverse(), saveFeedArticle, function (err) {
             if (err) {
                 console.log(err);
             } else {
