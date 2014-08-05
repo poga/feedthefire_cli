@@ -2,6 +2,7 @@
   "name": "feedthefire",
   "version": "0.1.0",
   "author": "Anant Narayanan <anant@kix.in>",
+  "main": "index.js",
   "description": "An RSS to Firebase Pipe",
   "dependencies": {
     "feedparser": "0.15.x",
