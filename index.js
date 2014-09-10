@@ -55,6 +55,10 @@ function getFeedFromURL() {
 
 function saveFeedArticle(article, cb){
     console.log('Save feed article');
+    if (article['description'].match(/((.|\n)*)<!--more-->/)) {
+        article['description'] = article['description'].match(/((.|\n)*)<!--more-->/)[1];
+    }
+
     ref.child('articles').push(sanitizeObject(article), cb);
 }
 
