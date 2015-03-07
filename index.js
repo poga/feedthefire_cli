@@ -26,7 +26,7 @@ ref.auth(SECRET, function(err) {
 
 function getFeedFromURL() {
   console.log('Get feed from URL');
-  //var statusURL = FBURL; 
+  //var statusURL = FBURL;
   request(FEEDURL, function(err, resp, body) {
     if (!err && resp.statusCode == 200) {
       Parser.parseString(body, {addmeta: false}, function(err, meta, articles) {
@@ -38,6 +38,7 @@ function getFeedFromURL() {
         async.each(articles.reverse(), saveFeedArticle, function (err) {
             if (err) {
                 console.log(err);
+                process.exit();
             } else {
                 process.exit();
             }
