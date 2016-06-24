@@ -31,8 +31,8 @@ function getFeedFromURL() {
     if (!err && resp.statusCode == 200) {
       Parser.parseString(body, {addmeta: false}, function(err, meta, articles) {
         if (err) {
-          console.log(err);
-          return;
+            console.log(err);
+            process.exit();
         }
         //console.log('articles',articles);
         async.each(articles.reverse(), saveFeedArticle, function (err) {
@@ -47,8 +47,10 @@ function getFeedFromURL() {
     } else {
       if (err) {
         console.log(err);
+        process.exit();
       } else {
         console.log(resp.statusCode);
+        process.exit();
       }
     }
   });
