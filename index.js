@@ -32,13 +32,13 @@ function getFeedFromURL() {
       Parser.parseString(body, {addmeta: false}, function(err, meta, articles) {
         if (err) {
             console.log(err);
-            process.exit();
+            process.exit(1);
         }
         //console.log('articles',articles);
         async.each(articles.reverse(), saveFeedArticle, function (err) {
             if (err) {
                 console.log(err);
-                process.exit();
+                process.exit(1);
             } else {
                 process.exit();
             }
@@ -47,7 +47,7 @@ function getFeedFromURL() {
     } else {
       if (err) {
         console.log(err);
-        process.exit();
+        process.exit(1);
       } else {
         console.log(resp.statusCode);
         process.exit();
